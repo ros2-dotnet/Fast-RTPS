@@ -142,7 +142,7 @@ public:
 
     //! Checks for TCP kinds.
     virtual bool IsLocatorSupported(const Locator_t&) const override;
-    virtual bool IsInterfaceAllowed(const std::string& interface) const = 0;
+    virtual bool IsInterfaceAllowed(const std::string& interface_name) const = 0;
 
     //! Checks if the channel is bound to the given sender resource.
     bool IsOutputChannelBound(const Locator_t&) const;

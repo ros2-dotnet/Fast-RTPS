@@ -80,8 +80,8 @@ UDPv6Transport::UDPv6Transport(const UDPv6TransportDescriptor& descriptor)
     mTransportKind = LOCATOR_KIND_UDPv6;
     mSendBufferSize = descriptor.sendBufferSize;
     mReceiveBufferSize = descriptor.receiveBufferSize;
-    for (const auto& interface : descriptor.interfaceWhiteList)
-        mInterfaceWhiteList.emplace_back(ip::address_v6::from_string(interface));
+    for (const auto& interface_name : descriptor.interfaceWhiteList)
+        mInterfaceWhiteList.emplace_back(ip::address_v6::from_string(interface_name));
 }
 
 UDPv6TransportDescriptor::UDPv6TransportDescriptor()
@@ -337,9 +337,9 @@ std::vector<std::string> UDPv6Transport::GetBindingInterfacesList()
     return vOutputInterfaces;
 }
 
-bool UDPv6Transport::IsInterfaceAllowed(const std::string& interface) const
+bool UDPv6Transport::IsInterfaceAllowed(const std::string& interface_name) const
 {
-    return IsInterfaceAllowed(asio::ip::address_v6::from_string(interface));
+    return IsInterfaceAllowed(asio::ip::address_v6::from_string(interface_name));
 }
 
 bool UDPv6Transport::IsInterfaceAllowed(const ip::address_v6& ip) const

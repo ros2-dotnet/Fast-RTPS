@@ -79,8 +79,8 @@ UDPv4Transport::UDPv4Transport(const UDPv4TransportDescriptor& descriptor)
     mTransportKind = LOCATOR_KIND_UDPv4;
     mSendBufferSize = descriptor.sendBufferSize;
     mReceiveBufferSize = descriptor.receiveBufferSize;
-    for (const auto& interface : descriptor.interfaceWhiteList)
-        mInterfaceWhiteList.emplace_back(ip::address_v4::from_string(interface));
+    for (const auto& intrf : descriptor.interfaceWhiteList)
+        mInterfaceWhiteList.emplace_back(ip::address_v4::from_string(intrf));
 }
 
 UDPv4TransportDescriptor::UDPv4TransportDescriptor()
@@ -381,9 +381,9 @@ std::vector<std::string> UDPv4Transport::GetBindingInterfacesList()
     return vOutputInterfaces;
 }
 
-bool UDPv4Transport::IsInterfaceAllowed(const std::string& interface) const
+bool UDPv4Transport::IsInterfaceAllowed(const std::string& interface_name) const
 {
-    return IsInterfaceAllowed(asio::ip::address_v4::from_string(interface));
+    return IsInterfaceAllowed(asio::ip::address_v4::from_string(interface_name));
 }
 
 bool UDPv4Transport::IsInterfaceAllowed(const ip::address_v4& ip) const

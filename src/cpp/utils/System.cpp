@@ -1,7 +1,7 @@
 #include <fastrtps/utils/System.h>
 
 #if defined(_WIN32)
-#include <process.h>
+#include <windows.h>
 #else
 #include <unistd.h>
 #endif
@@ -11,10 +11,8 @@ namespace fastrtps {
 
 int System::GetPID()
 {
-#if defined(__cplusplus_winrt)
+#if defined(_WIN32)
     return (int)GetCurrentProcessId();
-#elif defined(_WIN32)
-    return (int)_getpid();
 #else
     return (int)getpid();
 #endif

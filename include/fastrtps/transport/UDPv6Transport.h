@@ -103,7 +103,7 @@ protected:
     virtual std::vector<std::string> GetBindingInterfacesList() override;
 
     //! Checks if the given interface is allowed by the white list.
-    virtual bool IsInterfaceAllowed(const std::string& interface) const override;
+    virtual bool IsInterfaceAllowed(const std::string& interface_name) const override;
 
     //! Checks if the given interface is allowed by the white list.
     bool IsInterfaceAllowed(const asio::ip::address_v6& ip) const;

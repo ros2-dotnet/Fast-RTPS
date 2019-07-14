@@ -93,7 +93,7 @@ protected:
     eProsimaUDPSocket OpenAndBindInputSocket(const std::string& sIp, uint16_t port, bool is_multicast) override;
 
     //! Checks if the given interface is allowed by the white list.
-    virtual bool IsInterfaceAllowed(const std::string& interface) const override;
+    virtual bool IsInterfaceAllowed(const std::string& interface_name) const override;
 
     /**
     * Method to get a list of interfaces to bind the socket associated to the given locator.

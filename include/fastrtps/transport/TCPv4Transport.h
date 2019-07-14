@@ -101,7 +101,7 @@ protected:
     bool IsLocatorAllowed(const Locator_t& locator) const override;
 
     //! Checks if the given ip has been included in the white list to use it.
-    virtual bool IsInterfaceAllowed(const std::string& interface) const override;
+    virtual bool IsInterfaceAllowed(const std::string& interface_name) const override;
 
     //! Checks if the given interface is allowed by the white list.
     bool IsInterfaceAllowed(const asio::ip::address_v4& ip) const;
