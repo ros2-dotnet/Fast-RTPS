@@ -42,18 +42,18 @@ static int DOMAIN = 10;
 
 // TODO - Remove DISABLED when XTYPES are implemented.
 
-class xtypes : public ::testing::Test
+class XTypesTest : public ::testing::Test
 {
 public:
 
-    xtypes()
+    XTypesTest()
     {
         //Log::SetVerbosity(Log::Info);
         //Log::SetCategoryFilter(std::regex("(SECURITY)"));
         registerTypesTypes();
     }
 
-    ~xtypes()
+    ~XTypesTest()
     {
         //Log::Reset();
         Log::KillThread();
@@ -68,7 +68,7 @@ public:
  * Both endpoints share the same type without DataRepresentationQos, so they must match.
  * This represents classical match.
 */
-TEST_F(xtypes, NoTypeObjectSameType)
+TEST_F(XTypesTest, NoTypeObjectSameType)
 {
     TypeSupport type(new BasicStructPubSubType());
     TestPublisher pub;
@@ -89,7 +89,7 @@ TEST_F(xtypes, NoTypeObjectSameType)
  * Both endpoints share the same type without DataRepresentationQosm, but they force type validation,
  * so they must not match.
 */
-TEST_F(xtypes, NoTypeObjectSameTypeForce)
+TEST_F(XTypesTest, NoTypeObjectSameTypeForce)
 {
     TypeSupport type(new BasicStructPubSubType());
     TestPublisher pub;
@@ -119,7 +119,7 @@ TEST_F(xtypes, NoTypeObjectSameTypeForce)
  * The endpoints have different types without DataRepresentationQos, so they must not match.
  * This represents classical mismatch.
 */
-TEST_F(xtypes, NoTypeObjectDifferentType)
+TEST_F(XTypesTest, NoTypeObjectDifferentType)
 {
     TypeSupport type(new BasicStructPubSubType());
     TypeSupport type2(new BasicNamesStructPubSubType());
@@ -143,7 +143,7 @@ TEST_F(xtypes, NoTypeObjectDifferentType)
  * Both endpoints share the same type using XCDR1 so they must match.
  * This represents classical match.
 */
-TEST_F(xtypes, TypeObjectV1SameType)
+TEST_F(XTypesTest, TypeObjectV1SameType)
 {
     TypeSupport type(new BasicStructPubSubType());
     const TypeObject* type_obj = GetMinimalBasicStructObject();
@@ -181,7 +181,7 @@ TEST_F(xtypes, TypeObjectV1SameType)
  * TEST TYPE DISCOVERY
  * RETRIEVE PUB's TYPE
 */
-TEST_F(xtypes, TypeDiscoverySubs)
+TEST_F(XTypesTest, TypeDiscoverySubs)
 {
     TypeSupport type(new BasicStructPubSubType());
     const TypeObject* type_obj = GetCompleteBasicStructObject();
@@ -231,7 +231,7 @@ TEST_F(xtypes, TypeDiscoverySubs)
  * TEST TYPE DISCOVERY
  * RETRIEVE SUB's TYPE
 */
-TEST_F(xtypes, TypeDiscoveryPubs)
+TEST_F(XTypesTest, TypeDiscoveryPubs)
 {
     TypeSupport type(new BasicStructPubSubType());
     const TypeObject* type_obj = GetCompleteBasicStructObject();
@@ -268,7 +268,7 @@ TEST_F(xtypes, TypeDiscoveryPubs)
 /*
  * Both endpoints different types using XCDR1 so they must not match even with full coercion allowed.
 */
-TEST_F(xtypes, TypeObjectV1DifferentType)
+TEST_F(XTypesTest, TypeObjectV1DifferentType)
 {
     TypeSupport type1(new BasicStructPubSubType());
     TypeSupport type2(new BasicBadStructPubSubType());
@@ -309,7 +309,7 @@ TEST_F(xtypes, TypeObjectV1DifferentType)
  * BasicStruct and BasicNamesStruct are similar structures, but with different names in members.
  * This test checks failure at the member names through TypeIdentifier's hashes. The endpoints must not match.
 */
-TEST_F(xtypes, TypeObjectV1NamesManaged)
+TEST_F(XTypesTest, TypeObjectV1NamesManaged)
 {
     TypeSupport type1(new BasicStructPubSubType());
     TypeSupport type2(new BasicNamesStructPubSubType());
@@ -350,7 +350,7 @@ TEST_F(xtypes, TypeObjectV1NamesManaged)
  * BasicStruct and BasicNamesStruct are similar structures, but with different names in struct and members.
  * This test checks ignoring at the member names through TypeIdentifier's hashes. The endpoints must match.
 */
-TEST_F(xtypes, DISABLED_TypeObjectV1NamesIgnored)
+TEST_F(XTypesTest, DISABLED_TypeObjectV1NamesIgnored)
 {
     TypeSupport type1(new BasicStructPubSubType());
     TypeSupport type2(new BasicNamesStructPubSubType());
@@ -392,7 +392,7 @@ TEST_F(xtypes, DISABLED_TypeObjectV1NamesIgnored)
  * This test checks ignoring at the member names when disallowed type coercion has no effect.
  * The endpoints must not match.
 */
-TEST_F(xtypes, TypeObjectV1NamesIgnoredDisallow)
+TEST_F(XTypesTest, TypeObjectV1NamesIgnoredDisallow)
 {
     TypeSupport type1(new BasicStructPubSubType());
     TypeSupport type2(new BasicNamesStructPubSubType());
@@ -433,7 +433,7 @@ TEST_F(xtypes, TypeObjectV1NamesIgnoredDisallow)
  * BasicStruct and BasicWideStruct are similar structures, but with "Wide" adds a member.
  * This test checks type widening. The endpoints must match.
 */
-TEST_F(xtypes, DISABLED_TypeObjectV1TypeWidening)
+TEST_F(XTypesTest, DISABLED_TypeObjectV1TypeWidening)
 {
     TypeSupport type1(new BasicStructPubSubType());
     TypeSupport type2(new BasicWideStructPubSubType());
@@ -474,7 +474,7 @@ TEST_F(xtypes, DISABLED_TypeObjectV1TypeWidening)
  * BasicStruct and BadBasicWideStruct are similar structures, but with "Wide" adds a member, and in this case
  * modifies the type of other member. The endpoints must not match.
 */
-TEST_F(xtypes, TypeObjectV1BadTypeWidening)
+TEST_F(XTypesTest, TypeObjectV1BadTypeWidening)
 {
     TypeSupport type1(new BasicStructPubSubType());
     TypeSupport type2(new BadBasicWideStructPubSubType());
@@ -515,7 +515,7 @@ TEST_F(xtypes, TypeObjectV1BadTypeWidening)
  * BasicStruct and BasicWideStruct are similar structures, but with "Wide" adds a member.
  * This test checks prevent type widening when assigning narrow to wide. The endpoints must match.
 */
-TEST_F(xtypes, DISABLED_TypeObjectV1TypeWideningPreventedNarrowToWide)
+TEST_F(XTypesTest, DISABLED_TypeObjectV1TypeWideningPreventedNarrowToWide)
 {
     TypeSupport type1(new BasicStructPubSubType());
     TypeSupport type2(new BasicWideStructPubSubType());
@@ -556,7 +556,7 @@ TEST_F(xtypes, DISABLED_TypeObjectV1TypeWideningPreventedNarrowToWide)
  * BasicStruct and BasicWideStruct are similar structures, but with "Wide" adds a member.
  * This test checks prevent type widening when assining from wide to narrow. The endpoints must not match.
 */
-TEST_F(xtypes, TypeObjectV1TypeWideningPreventedWideToNarrow)
+TEST_F(XTypesTest, TypeObjectV1TypeWideningPreventedWideToNarrow)
 {
     TypeSupport type1(new BasicStructPubSubType());
     TypeSupport type2(new BasicWideStructPubSubType());
@@ -597,7 +597,7 @@ TEST_F(xtypes, TypeObjectV1TypeWideningPreventedWideToNarrow)
  * BasicStruct and BasicWideStruct are similar structures, but with "Wide" adds a member, but coercion is disallowed.
  * This test checks type widening. The endpoints must match.
 */
-TEST_F(xtypes, TypeObjectV1TypeWideningDisallow)
+TEST_F(XTypesTest, TypeObjectV1TypeWideningDisallow)
 {
     TypeSupport type1(new BasicStructPubSubType());
     TypeSupport type2(new BasicWideStructPubSubType());
@@ -638,7 +638,7 @@ TEST_F(xtypes, TypeObjectV1TypeWideningDisallow)
  * SequenceStruct and SequenceBoundsStruct are similar structures, but with "Bounds" the size of the sequence is bigger.
  * This test checks sequence bounds. The endpoints must match.
 */
-TEST_F(xtypes, DISABLED_TypeObjectV1SequenceBoundsIgnored)
+TEST_F(XTypesTest, DISABLED_TypeObjectV1SequenceBoundsIgnored)
 {
     TypeSupport type1(new SequenceStructPubSubType());
     TypeSupport type2(new SequenceBoundsStructPubSubType());
@@ -679,7 +679,7 @@ TEST_F(xtypes, DISABLED_TypeObjectV1SequenceBoundsIgnored)
  * SequenceStruct and SequenceBoundsStruct are similar structures, but with "Bounds" the size of the sequence is bigger.
  * This test checks sequence bounds. The endpoints must not match.
 */
-TEST_F(xtypes, TypeObjectV1SequenceBoundsManaged)
+TEST_F(XTypesTest, TypeObjectV1SequenceBoundsManaged)
 {
     TypeSupport type1(new SequenceStructPubSubType());
     TypeSupport type2(new SequenceBoundsStructPubSubType());
@@ -721,7 +721,7 @@ TEST_F(xtypes, TypeObjectV1SequenceBoundsManaged)
  * Names are ignored because the member is named different.
  * This test checks string bounds. The endpoints must match.
 */
-TEST_F(xtypes, DISABLED_TypeObjectV1LargeStringIgnored)
+TEST_F(XTypesTest, DISABLED_TypeObjectV1LargeStringIgnored)
 {
     TypeSupport type1(new StringStructPubSubType());
     TypeSupport type2(new LargeStringStructPubSubType());
@@ -763,7 +763,7 @@ TEST_F(xtypes, DISABLED_TypeObjectV1LargeStringIgnored)
  * Names are ignored because the member is named different.
  * This test checks string bounds. The endpoints must not match.
 */
-TEST_F(xtypes, TypeObjectV1LargeStringManaged)
+TEST_F(XTypesTest, TypeObjectV1LargeStringManaged)
 {
     TypeSupport type1(new StringStructPubSubType());
     TypeSupport type2(new LargeStringStructPubSubType());
@@ -803,7 +803,7 @@ TEST_F(xtypes, TypeObjectV1LargeStringManaged)
 /*
  * Both endpoints share the same type using XCDR1 so they must match, in this case using Complete.
 */
-TEST_F(xtypes, TypeObjectV1SameTypeComplete)
+TEST_F(XTypesTest, TypeObjectV1SameTypeComplete)
 {
     TypeSupport type(new BasicStructPubSubType());
     const TypeObject* type_obj = GetCompleteBasicStructObject();
@@ -841,7 +841,7 @@ TEST_F(xtypes, TypeObjectV1SameTypeComplete)
  * Both endpoints use compatible but different types using XCDR1 but without coercion so they must not match,
  * in this case using Complete.
 */
-TEST_F(xtypes, TypeObjectV1InvalidComplete)
+TEST_F(XTypesTest, TypeObjectV1InvalidComplete)
 {
     TypeSupport type1(new BasicStructPubSubType());
     TypeSupport type2(new BasicNamesStructPubSubType());
@@ -882,7 +882,7 @@ TEST_F(xtypes, TypeObjectV1InvalidComplete)
  * Both endpoints the same type using XCDR1 but one using minimal and the other complete.
  * They shouldn't match.
 */
-TEST_F(xtypes, MixingMinimalAndComplete)
+TEST_F(XTypesTest, MixingMinimalAndComplete)
 {
     TypeSupport type1(new BasicStructPubSubType());
     const TypeObject* type_obj1 = GetMinimalBasicStructObject();
@@ -924,7 +924,7 @@ TEST_F(xtypes, MixingMinimalAndComplete)
  * Both endpoints share the same type using XCDR1 so they must match.
  * This represents classical match.
 */
-TEST_F(xtypes, TypeIdentifierSameType)
+TEST_F(XTypesTest, TypeIdentifierSameType)
 {
     TypeSupport type(new BasicStructPubSubType());
     const TypeIdentifier* type_id = GetBasicStructIdentifier(false);
@@ -960,7 +960,7 @@ TEST_F(xtypes, TypeIdentifierSameType)
 /*
  * Both endpoints different types using XCDR1 so they must not match even with full coercion allowed.
 */
-TEST_F(xtypes, TypeIdentifierDifferentType)
+TEST_F(XTypesTest, TypeIdentifierDifferentType)
 {
     TypeSupport type1(new BasicStructPubSubType());
     TypeSupport type2(new BasicBadStructPubSubType());
@@ -999,7 +999,7 @@ TEST_F(xtypes, TypeIdentifierDifferentType)
  * BasicStruct and BasicNamesStruct are similar structures, but with different names in members.
  * This test checks failure at the member names through TypeIdentifier's hashes. The endpoints must not match.
 */
-TEST_F(xtypes, TypeIdentifierNamesManaged)
+TEST_F(XTypesTest, TypeIdentifierNamesManaged)
 {
     TypeSupport type1(new BasicStructPubSubType());
     TypeSupport type2(new BasicNamesStructPubSubType());
@@ -1038,7 +1038,7 @@ TEST_F(xtypes, TypeIdentifierNamesManaged)
  * BasicStruct and BasicNamesStruct are similar structures, but with different names in struct and members.
  * This test checks ignoring at the member names through TypeIdentifier's hashes. The endpoints must match.
 */
-TEST_F(xtypes, DISABLED_TypeIdentifierNamesIgnored)
+TEST_F(XTypesTest, DISABLED_TypeIdentifierNamesIgnored)
 {
     TypeSupport type1(new BasicStructPubSubType());
     TypeSupport type2(new BasicNamesStructPubSubType());
@@ -1079,7 +1079,7 @@ TEST_F(xtypes, DISABLED_TypeIdentifierNamesIgnored)
  * Both endpoints share the same type using XCDR1 so they must match.
  * This represents classical match.
 */
-TEST_F(xtypes, TypeInformationSameType)
+TEST_F(XTypesTest, TypeInformationSameType)
 {
     TypeSupport type(new BasicStructPubSubType());
     const TypeInformation* type_info = TypeObjectFactory::get_instance()->get_type_information("BasicStruct");
@@ -1114,7 +1114,7 @@ TEST_F(xtypes, TypeInformationSameType)
 /*
  * Both endpoints different types using XCDR1 so they must not match even with full coercion allowed.
 */
-TEST_F(xtypes, TypeInformationDifferentType)
+TEST_F(XTypesTest, TypeInformationDifferentType)
 {
     TypeSupport type1(new BasicStructPubSubType());
     TypeSupport type2(new BasicBadStructPubSubType());
@@ -1153,7 +1153,7 @@ TEST_F(xtypes, TypeInformationDifferentType)
  * BasicStruct and BasicNamesStruct are similar structures, but with different names in members.
  * This test checks failure at the member names through TypeInformation's hashes. The endpoints must not match.
 */
-TEST_F(xtypes, TypeInformationNamesManaged)
+TEST_F(XTypesTest, TypeInformationNamesManaged)
 {
     TypeSupport type1(new BasicStructPubSubType());
     TypeSupport type2(new BasicNamesStructPubSubType());
@@ -1192,7 +1192,7 @@ TEST_F(xtypes, TypeInformationNamesManaged)
  * BasicStruct and BasicNamesStruct are similar structures, but with different names in struct and members.
  * This test checks ignoring at the member names through TypeInformation's hashes. The endpoints must match.
 */
-TEST_F(xtypes, DISABLED_TypeInformationNamesIgnored)
+TEST_F(XTypesTest, DISABLED_TypeInformationNamesIgnored)
 {
     TypeSupport type1(new BasicStructPubSubType());
     TypeSupport type2(new BasicNamesStructPubSubType());
@@ -1229,7 +1229,7 @@ TEST_F(xtypes, DISABLED_TypeInformationNamesIgnored)
 
 /**** Mixing TypeObject, TypeInformation and TypeIdentifier ****/
 
-TEST_F(xtypes, TypeIdentifier_TypeObject)
+TEST_F(XTypesTest, TypeIdentifier_TypeObject)
 {
     TypeSupport type(new BasicStructPubSubType());
     const TypeObject* type_obj = GetMinimalBasicStructObject();
@@ -1252,7 +1252,7 @@ TEST_F(xtypes, TypeIdentifier_TypeObject)
     pub.waitDiscovery(false, 3);
 }
 
-TEST_F(xtypes, TypeIdentifier_TypeInformation)
+TEST_F(XTypesTest, TypeIdentifier_TypeInformation)
 {
     TypeSupport type(new BasicStructPubSubType());
     const TypeIdentifier* type_id = GetBasicStructIdentifier(false);
@@ -1275,7 +1275,7 @@ TEST_F(xtypes, TypeIdentifier_TypeInformation)
     pub.waitDiscovery(false, 3);
 }
 
-TEST_F(xtypes, TypeObject_TypeInformation)
+TEST_F(XTypesTest, TypeObject_TypeInformation)
 {
     TypeSupport type(new BasicStructPubSubType());
     const TypeObject* type_obj = GetMinimalBasicStructObject();
@@ -1303,7 +1303,7 @@ TEST_F(xtypes, TypeObject_TypeInformation)
 /*
  * Empty-Empty
 */
-TEST_F(xtypes, DISABLED_DataRepQoSEE)
+TEST_F(XTypesTest, DISABLED_DataRepQoSEE)
 {
     TypeSupport type(new BasicStructPubSubType());
     TestPublisher pub;
@@ -1328,7 +1328,7 @@ TEST_F(xtypes, DISABLED_DataRepQoSEE)
 /*
  * Empty-XCDR1
 */
-TEST_F(xtypes, DISABLED_DataRepQoSE1)
+TEST_F(XTypesTest, DISABLED_DataRepQoSE1)
 {
     TypeSupport type(new BasicStructPubSubType());
     TestPublisher pub;
@@ -1358,7 +1358,7 @@ TEST_F(xtypes, DISABLED_DataRepQoSE1)
 /*
  * Empty-XCDR2
 */
-TEST_F(xtypes, DISABLED_DataRepQoSE2)
+TEST_F(XTypesTest, DISABLED_DataRepQoSE2)
 {
     TypeSupport type(new BasicStructPubSubType());
     TestPublisher pub;
@@ -1388,7 +1388,7 @@ TEST_F(xtypes, DISABLED_DataRepQoSE2)
 /*
  * Empty-XML
 */
-TEST_F(xtypes, DISABLED_DataRepQoSEX)
+TEST_F(XTypesTest, DISABLED_DataRepQoSEX)
 {
     TypeSupport type(new BasicStructPubSubType());
     TestPublisher pub;
@@ -1418,7 +1418,7 @@ TEST_F(xtypes, DISABLED_DataRepQoSEX)
 /*
  * Empty-XCDR12
 */
-TEST_F(xtypes, DISABLED_DataRepQoSE12)
+TEST_F(XTypesTest, DISABLED_DataRepQoSE12)
 {
     TypeSupport type(new BasicStructPubSubType());
     TestPublisher pub;
@@ -1448,7 +1448,7 @@ TEST_F(xtypes, DISABLED_DataRepQoSE12)
 /*
  * XCDR1-XCDR2
 */
-TEST_F(xtypes, DISABLED_DataRepQoS12)
+TEST_F(XTypesTest, DISABLED_DataRepQoS12)
 {
     TypeSupport type(new BasicStructPubSubType());
     TestPublisher pub;
@@ -1478,7 +1478,7 @@ TEST_F(xtypes, DISABLED_DataRepQoS12)
 /*
  * XCDR2-Empty
 */
-TEST_F(xtypes, DISABLED_DataRepQoS2E)
+TEST_F(XTypesTest, DISABLED_DataRepQoS2E)
 {
     TypeSupport type(new BasicStructPubSubType());
     TestPublisher pub;
@@ -1508,7 +1508,7 @@ TEST_F(xtypes, DISABLED_DataRepQoS2E)
 /*
  * XCDR2-XCDR1
 */
-TEST_F(xtypes, DISABLED_DataRepQoS21)
+TEST_F(XTypesTest, DISABLED_DataRepQoS21)
 {
     TypeSupport type(new BasicStructPubSubType());
     TestPublisher pub;
@@ -1538,7 +1538,7 @@ TEST_F(xtypes, DISABLED_DataRepQoS21)
 /*
  * XCDR2-XCDR2
 */
-TEST_F(xtypes, DISABLED_DataRepQoS22)
+TEST_F(XTypesTest, DISABLED_DataRepQoS22)
 {
     TypeSupport type(new BasicStructPubSubType());
     TestPublisher pub;
@@ -1563,7 +1563,7 @@ TEST_F(xtypes, DISABLED_DataRepQoS22)
 /*
  * XML-Empty
 */
-TEST_F(xtypes, DISABLED_DataRepQoSXE)
+TEST_F(XTypesTest, DISABLED_DataRepQoSXE)
 {
     TypeSupport type(new BasicStructPubSubType());
     TestPublisher pub;
@@ -1593,7 +1593,7 @@ TEST_F(xtypes, DISABLED_DataRepQoSXE)
 /*
  * XML-XML - Fails until supported.
 */
-TEST_F(xtypes, DISABLED_DataRepQoSXX)
+TEST_F(XTypesTest, DISABLED_DataRepQoSXX)
 {
     TypeSupport type(new BasicStructPubSubType());
     TestPublisher pub;
@@ -1626,7 +1626,7 @@ TEST_F(xtypes, DISABLED_DataRepQoSXX)
 /*
  * Type discovery using TypeLookup Service (BasicStruct)
 */
-TEST_F(XTypes, TypeLookupBasic)
+TEST_F(XTypesTest, TypeLookupBasic)
 {
     TypeSupport type(new BasicStructPubSubType());
     const TypeInformation* type_info = TypeObjectFactory::get_instance()->get_type_information("BasicStruct");
@@ -1658,7 +1658,7 @@ TEST_F(XTypes, TypeLookupBasic)
 /*
  * Type discovery using TypeLookup Service (MapMapBoundsStruct)
 */
-TEST_F(XTypes, TypeLookupMapMapBounds)
+TEST_F(XTypesTest, TypeLookupMapMapBounds)
 {
     TypeSupport type(new MapMapBoundsStructPubSubType());
     const TypeInformation* type_info = TypeObjectFactory::get_instance()->get_type_information("MapMapBoundsStruct");
@@ -1690,7 +1690,7 @@ TEST_F(XTypes, TypeLookupMapMapBounds)
 /*
  * Type discovery using TypeLookup Service (MapMapBoundsStruct), but subscriber offers the type
 */
-TEST_F(XTypes, TypeLookupMapMapBoundsSub)
+TEST_F(XTypesTest, TypeLookupMapMapBoundsSub)
 {
     TypeSupport type(new MapMapBoundsStructPubSubType());
     const TypeInformation* type_info = TypeObjectFactory::get_instance()->get_type_information("MapMapBoundsStruct");
