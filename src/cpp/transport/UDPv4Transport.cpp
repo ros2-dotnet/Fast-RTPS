@@ -405,9 +405,9 @@ std::vector<std::string> UDPv4Transport::get_binding_interfaces_list()
     return vOutputInterfaces;
 }
 
-bool UDPv4Transport::is_interface_allowed(const std::string& interface) const
+bool UDPv4Transport::is_interface_allowed(const std::string& interface_name) const
 {
-    return is_interface_allowed(asio::ip::address_v4::from_string(interface));
+    return is_interface_allowed(asio::ip::address_v4::from_string(interface_name));
 }
 
 bool UDPv4Transport::is_interface_allowed(const ip::address_v4& ip) const

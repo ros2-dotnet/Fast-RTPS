@@ -67,9 +67,9 @@ TCPv6Transport::TCPv6Transport(const TCPv6TransportDescriptor& descriptor)
     : TCPTransportInterface(LOCATOR_KIND_TCPv6)
     , configuration_(descriptor)
 {
-    for (const auto& interface : descriptor.interfaceWhiteList)
+    for (const auto& interface_name : descriptor.interfaceWhiteList)
     {
-        interface_whitelist_.emplace_back(ip::address_v6::from_string(interface));
+        interface_whitelist_.emplace_back(ip::address_v6::from_string(interface_name));
     }
 
     for (uint16_t port : configuration_.listening_ports)
@@ -183,9 +183,9 @@ bool TCPv6Transport::is_interface_whitelist_empty() const
     return interface_whitelist_.empty();
 }
 
-bool TCPv6Transport::is_interface_allowed(const std::string& interface) const
+bool TCPv6Transport::is_interface_allowed(const std::string& interface_name) const
 {
-    return is_interface_allowed(asio::ip::address_v6::from_string(interface));
+    return is_interface_allowed(asio::ip::address_v6::from_string(interface_name));
 }
 
 bool TCPv6Transport::is_interface_allowed(const ip::address_v6& ip) const
