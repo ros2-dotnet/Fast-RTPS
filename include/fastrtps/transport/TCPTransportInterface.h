@@ -226,7 +226,7 @@ public:
     */
     virtual bool is_interface_allowed(const Locator_t& loc) const = 0;
 
-    virtual bool is_interface_allowed(const std::string& interface) const = 0;
+    virtual bool is_interface_allowed(const std::string& interface_name) const = 0;
 
     //! Checks for TCP kinds.
     virtual bool IsLocatorSupported(const Locator_t&) const override;
