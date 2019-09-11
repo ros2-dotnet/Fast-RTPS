@@ -134,7 +134,7 @@ protected:
     virtual bool is_interface_whitelist_empty() const = 0;
 
     //! Checks if the given interface is allowed by the white list.
-    virtual bool is_interface_allowed(const std::string& interface) const = 0;
+    virtual bool is_interface_allowed(const std::string& interface_name) const = 0;
 
     /**
     * Method to get a list of interfaces to bind the socket associated to the given locator.

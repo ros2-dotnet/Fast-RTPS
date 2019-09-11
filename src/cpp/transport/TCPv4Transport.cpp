@@ -66,9 +66,9 @@ TCPv4Transport::TCPv4Transport(const TCPv4TransportDescriptor& descriptor)
     : TCPTransportInterface(LOCATOR_KIND_TCPv4)
     , configuration_(descriptor)
 {
-    for (const auto& interface : descriptor.interfaceWhiteList)
+    for (const auto& interface_name : descriptor.interfaceWhiteList)
     {
-        interface_whitelist_.emplace_back(ip::address_v4::from_string(interface));
+        interface_whitelist_.emplace_back(ip::address_v4::from_string(interface_name));
     }
 
     for (uint16_t port : configuration_.listening_ports)
@@ -170,9 +170,9 @@ bool TCPv4Transport::is_interface_whitelist_empty() const
     return interface_whitelist_.empty();
 }
 
-bool TCPv4Transport::is_interface_allowed(const std::string& interface) const
+bool TCPv4Transport::is_interface_allowed(const std::string& interface_name) const
 {
-    return is_interface_allowed(asio::ip::address_v4::from_string(interface));
+    return is_interface_allowed(asio::ip::address_v4::from_string(interface_name));
 }
 
 bool TCPv4Transport::is_interface_allowed(const ip::address_v4& ip) const

@@ -95,7 +95,7 @@ protected:
     virtual bool is_interface_whitelist_empty() const override;
 
     //! Checks if the given interface is allowed by the white list.
-    virtual bool is_interface_allowed(const std::string& interface) const override;
+    virtual bool is_interface_allowed(const std::string& interface_name) const override;
 
     //! Checks if the given interface is allowed by the white list.
     bool is_interface_allowed(const asio::ip::address_v6& ip) const;
