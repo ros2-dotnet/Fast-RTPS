@@ -33,7 +33,7 @@ UDPChannelResource::UDPChannelResource(
     , message_receiver_(receiver)
     , socket_(moveSocket(socket))
     , only_multicast_purpose_(false)
-    , interface_(sInterface)
+    , interface_name_(sInterface)
     , transport_(transport)
 {
     thread(std::thread(&UDPChannelResource::perform_listen_operation, this, locator));
