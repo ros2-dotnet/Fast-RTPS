@@ -47,7 +47,7 @@ public:
     */
     TCPAcceptorBasic(
         asio::io_service& io_service,
-        const std::string& interface,
+        const std::string& interface_name,
         const Locator_t& locator);
 
     /**

@@ -116,14 +116,14 @@ public:
         return getSocketPtr(socket_);
     }
 
-    inline void interface(const std::string& interface)
+    inline void interface_name(const std::string& interface_name)
     {
-        interface_ = interface;
+        interface_name_ = interface_name;
     }
 
-    inline const std::string& interface() const
+    inline const std::string& interface_name() const
     {
-        return interface_;
+        return interface_name_;
     }
 
     inline void message_receiver(TransportReceiverInterface* receiver)
@@ -171,7 +171,7 @@ private:
     TransportReceiverInterface* message_receiver_; //Associated Readers/Writers inside of MessageReceiver
     eProsimaUDPSocket socket_;
     bool only_multicast_purpose_;
-    std::string interface_;
+    std::string interface_name_;
     UDPTransportInterface* transport_;
 
     UDPChannelResource(const UDPChannelResource&) = delete;

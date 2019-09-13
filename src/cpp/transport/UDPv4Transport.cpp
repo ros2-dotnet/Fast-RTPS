@@ -349,7 +349,7 @@ bool UDPv4Transport::OpenInputChannel(
             auto& channelResources = mInputSockets.at(IPLocator::getPhysicalPort(locator));
             for (UDPChannelResource* channelResource : channelResources)
             {
-                if (channelResource->interface() == s_IPv4AddressAny)
+                if (channelResource->interface_name() == s_IPv4AddressAny)
                 {
                     std::vector<IPFinder::info_IP> locNames;
                     get_ipv4s_unique_interfaces(locNames, true);
@@ -369,7 +369,7 @@ bool UDPv4Transport::OpenInputChannel(
                 }
                 else
                 {
-                    auto ip = asio::ip::address_v4::from_string(channelResource->interface());
+                    auto ip = asio::ip::address_v4::from_string(channelResource->interface_name());
                     try
                     {
                         channelResource->socket()->set_option(ip::multicast::join_group(locatorAddress, ip));
