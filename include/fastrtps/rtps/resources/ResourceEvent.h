@@ -27,8 +27,8 @@
 #include <thread>
 #include <atomic>
 #include <vector>
-#include <future>
 #include <asio.hpp>
+#include <future>
 
 namespace eprosima {
 namespace fastrtps{
