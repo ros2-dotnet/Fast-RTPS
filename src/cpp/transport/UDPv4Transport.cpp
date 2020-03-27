@@ -310,7 +310,7 @@ bool UDPv4Transport::OpenInputChannel(
             auto& channelResources = mInputSockets.at(IPLocator::getPhysicalPort(locator));
             for (UDPChannelResource* channelResource : channelResources)
             {
-                if (channelResource->interface() == locatorAddressStr)
+                if (channelResource->interface_name() == locatorAddressStr)
                 {
                     found = true;
                     break;
