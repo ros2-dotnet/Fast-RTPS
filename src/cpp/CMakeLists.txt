@@ -171,7 +171,9 @@ set(${PROJECT_NAME}_source_files
     )
 
 # TLS Support
-if(TLS_FOUND)
+# NOTE(esteve): disabled for UWP for now
+# https://github.com/ros2-dotnet/ros2_dotnet/issues/63
+if(TLS_FOUND AND NOT CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
     list(APPEND ${PROJECT_NAME}_source_files
         transport/TCPChannelResourceSecure.cpp
         transport/TCPAcceptorSecure.cpp
